@@ -13,4 +13,8 @@ public class ExampleService {
     }
     return "Hello World!";
   }
+
+  public String getCustomMessage(String message) {
+    return String.format("Custom message: %s", message);
+  }
 }
