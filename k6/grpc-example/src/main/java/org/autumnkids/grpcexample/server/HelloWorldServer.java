@@ -13,15 +13,29 @@ public class HelloWorldServer {
 
   private static final int PORT = 9001;
 
-  private Server server;
+  private final Server server;
 
-  private void start() throws IOException, InterruptedException {
+  public HelloWorldServer() {
     server = Grpc.newServerBuilderForPort(PORT, InsecureServerCredentials.create())
         .addService(new GreeterImpl())
         .build();
+  }
+
+  private void start() throws IOException, InterruptedException {
     server.start();
-    System.out.println(String.format("Starting server at port %d", PORT));
+    System.out.println(String.format("Server started at port %d", PORT));
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        HelloWorldServer.this.stop();
+        System.out.println("Server is shut down");
+      }
+    });
     server.awaitTermination();
+  }
+
+  private void stop() {
+    server.shutdownNow();
   }
 
   public static void main(String[] args) throws IOException, InterruptedException {

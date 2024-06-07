@@ -4,7 +4,6 @@ import io.grpc.Channel;
 import io.grpc.Grpc;
 import io.grpc.InsecureChannelCredentials;
 import io.grpc.ManagedChannel;
-import java.util.concurrent.TimeUnit;
 import org.autumnkids.grpcexample.helloworld.GreeterGrpc;
 import org.autumnkids.grpcexample.helloworld.HelloRequest;
 import org.autumnkids.grpcexample.helloworld.HelloResponse;
@@ -12,7 +11,7 @@ import org.autumnkids.grpcexample.helloworld.GreeterGrpc.GreeterBlockingStub;
 
 public class HelloWorldClient {
 
-  private static final String SERVER = "http://localhost:9001";
+  private static final String SERVER = "localhost:9001";
 
   private final GreeterBlockingStub serverStub;
 
@@ -34,6 +33,6 @@ public class HelloWorldClient {
         .build();
     HelloWorldClient client = new HelloWorldClient(channel);
     client.greet();
-    channel.shutdownNow().awaitTermination(5, TimeUnit.SECONDS);
+    channel.shutdownNow();
   }
 }
