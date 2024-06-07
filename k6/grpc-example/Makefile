@@ -6,3 +6,6 @@ run-client:
 
 package:
 	@mvn clean package
+
+run-smoke-test:
+	@k6 run -e TEST_HOST=localhost -e TEST_PORT=9001 ./load-tests/smoke-greeting.js
