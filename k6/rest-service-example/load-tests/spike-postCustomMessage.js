@@ -15,7 +15,7 @@ export const options = {
   }
 };
 
-export default function() {
+export default () => {
   const url = `${__ENV.TEST_HOST}/api/v1/examples/custom-message`;
   const payload = JSON.stringify({
     message: 'Test Message',
