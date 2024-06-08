@@ -15,7 +15,7 @@ export const options = {
   }
 };
 
-export default function() {
+export default () => {
   const response = http.get(`${__ENV.TEST_HOST}/api/v1/examples/helloworld`);
   check(response, {
     'status code is 200': r => r.status === 200,
