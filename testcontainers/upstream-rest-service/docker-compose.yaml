@@ -6,6 +6,6 @@ services:
       context: .
       dockerfile: ./docker/service.dockerfile
     ports:
-      - 8080:8080
+      - 9001:9001
     expose:
-      - 8080
+      - 9001

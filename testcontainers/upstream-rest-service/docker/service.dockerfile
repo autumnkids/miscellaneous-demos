@@ -16,6 +16,6 @@ RUN useradd ${user}
 WORKDIR /app
 COPY --from=prepare --chown=${user}:${group} /app/build/target/upstream-rest-service.jar ./upstream-rest-service.jar
 COPY --from=prepare --chown=${user}:${group} /app/build/docker/entrypoint.sh ./entrypoint.sh
-EXPOSE 8080
+EXPOSE 9001
 USER ${user}
 ENTRYPOINT [ "/bin/sh", "/app/entrypoint.sh" ]
