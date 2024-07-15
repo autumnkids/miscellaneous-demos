@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: consumer-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/test_container_demo
+    username: demo
+    password: p@$$w0Rd
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+upstream-rest-service:
+  host: localhost
+  port: 9001

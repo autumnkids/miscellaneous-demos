@@ -1,0 +1,33 @@
+openapi: 3.0.1
+info:
+  title: Upstream REST Service API
+  version: "1.0"
+servers:
+- url: http://localhost:9001
+  description: Generated server url
+paths:
+  /api/v1/helloworld/greet:
+    get:
+      tags:
+      - hello-world-controller
+      operationId: greet
+      parameters:
+      - name: name
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/GreetResponse"
+components:
+  schemas:
+    GreetResponse:
+      type: object
+      properties:
+        message:
+          type: string
