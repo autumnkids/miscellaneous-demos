@@ -1,4 +1,4 @@
-package io.autumnkids.consumer_service.greeting;
+package io.autumnkids.consumer_service.greeting.application;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,13 @@
 package io.autumnkids.consumer_service;
 
-import io.autumnkids.consumer_service.greeting.GreetController;
-import io.autumnkids.consumer_service.greeting.GreetService;
+import io.autumnkids.consumer_service.greeting.application.GreetController;
+import io.autumnkids.consumer_service.greeting.application.mappers.GreetUserMapper;
+import io.autumnkids.consumer_service.greeting.domain.services.GreetService;
+import io.autumnkids.consumer_service.greeting.persistent.repositories.GreetUserRepository;
 import io.autumnkids.consumer_service.upstream_rest_service.UpstreamRestServiceProperties;
 import org.junit.jupiter.api.Test;
+import org.mapstruct.factory.Mappers;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -19,7 +23,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @WebMvcTest(GreetController.class)
 @Testcontainers
-class GreetControllerTest {
+class UpstreamServiceIntegrationTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -29,9 +33,8 @@ class GreetControllerTest {
 			.withExposedPorts(9001);
 
 	@Test
-	void contextLoads() throws Exception {
+	void testGreetEndpointGetRequest() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/greet").param("name", "Test"))
-				.andDo(MockMvcResultHandlers.print())
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().string("{\"message\":\"Hello Test!\"}"));
 	}
@@ -45,7 +48,7 @@ class GreetControllerTest {
 			UpstreamRestServiceProperties properties = new UpstreamRestServiceProperties();
 			properties.setHost(upstreamService.getHost());
 			properties.setPort(upstreamService.getFirstMappedPort());
-			return new GreetService(properties);
+			return new GreetService(properties, Mockito.mock(GreetUserRepository.class), Mappers.getMapper(GreetUserMapper.class));
 		}
 	}
 
