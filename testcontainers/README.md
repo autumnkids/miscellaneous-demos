@@ -1,4 +1,4 @@
-# TestContainer Demo
+# TestContainers Demo
 
 This demo shows how integration tests can leverage [TestContainers](https://testcontainers.com/) to emulate the dependencies.
 

@@ -1,4 +1,4 @@
-# Test Container Integration Test Demo
+# TestContainers Integration Test Demo
 
 This demo includes two types of integration test that are using [TestContainers](https://testcontainers.com/) under the hood.
 
